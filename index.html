@@ -3,12 +3,25 @@
 <head>
 	<title>Forms</title>
 	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 	<link type="text/plain" rel="author" href="/humans.txt" />
 	<link rel="shortcut icon" href="http://adamshields.com/favicon.ico" />
 	<link rel="stylesheet" href="css/responsive-gs-12col.css" /><!-- resopnsive.gs grid system -->
 	<link rel="stylesheet" href="css/ie.css" /><!-- resopnsive.gs grid system -->
 	<link rel="stylesheet" href="css/main.css" />
 
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.js"></script>
+	<![endif]-->
+
+	<!-- Jumplink scroll js -->
+	<script>
+	function goToByScroll(id){
+$('html,body').animate({scrollTop: $(id).offset().top},'slow');
+}
+	</script>
 
 </head>
 	<body>
@@ -18,6 +31,14 @@
 		
 			<section>
 			
+								<!-- <script>$(document).ready(function(){
+									$('a.slow-jump').click(function(){
+									goToByScroll($(this).attr('href'));
+									return false;
+									});
+									});</script>
+
+								-->
 			</section>
 			
 		<footer>
