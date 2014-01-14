@@ -26,6 +26,49 @@ $dark-red: #490406;
 @import "reset";
 @import "defaults";
 
+/*-----12 col grid------*/
+
+@mixin col($num_col){
+
+	@if $num_col == 1 {
+		width: 8.33333333%;
+		}
+	@if $num_col == 2 {
+		width: 16.6666667%;
+		}
+	@if $num_col == 3 {
+		width: 25%;
+		}
+	@if  $num_col == 4 {
+		width: 33.3333333%;
+		}
+	@if $num_col == 5 {
+		width: 41.6666666%;
+		}
+	@if $num_col == 6 {
+		width: 50%;
+		}
+	@if $num_col == 7 {
+		width: 58.3333333%;
+		}
+	@if $num_col == 8 {
+		width: 66.6666666%;
+		}
+	@if $num_col == 9 {
+		width: 75%;
+		}
+	@if $num_col == 10{
+		width: 83.3333333%;
+		}
+	@if $num_col == 11 {
+		width: 91.6666666%;
+		}
+	@if $num_col == 12 {
+		width: 100%;
+	}
+}
+
+// @include col(12);
 
 
 
