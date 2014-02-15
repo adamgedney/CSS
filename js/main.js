@@ -6,6 +6,8 @@
 //@codekit-prepend "lightbox-2.6.min.js"
 
 
+//line length limit
+//==================================80char====================================//
 
 //namespace
 $(function(){

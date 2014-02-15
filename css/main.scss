@@ -1,105 +1,76 @@
-/* 	Copyright Adam Gedney 12/2/13
+/*
+	Thanks for checking out my code!!
+
+
+	Copyright Adam Gedney 2/15/14
 	contact: adam.gedney@gmail.com
 	http://adamgedney.com
 
 "Good UI design is humble.” – Jono DiCarlo
+*/
+/*
 
 
-/*Baseline Grid*/
-/*    3px    */
-
-/*----Sass Palette----*/
-$black: #101010;
-$rich-black: #000;
-$light-grey: #d0d0d0;
-$mid-grey: #363636;
-$grey: #7f7f7f;
-$dark-grey: #252525;
-$bg-grey: #171717;
-$white: #e6e6e6;
-$blue: #1e89b1;
-$purple: #AB14B4;
-$red: #cd241b;
-$dark-red: #490406;
+----------------SASS------------------*/
+$white: #fff;
+$off-white: #f6f6f6;
+$light-grey: #e8e8e8;
+$med-grey: #969696;
+$dark-grey: #333333;
+$black: #000;
+$dark-red: #990100;
+$light-red: #b90504;
+$blue: #0971b2;
+$yellow: #fffc19;
 
 /*----Sass imports----*/
+@import "util";
 @import "reset";
 @import "defaults";
 
-/*-----12 col grid------*/
 
-@mixin col($num_col){
 
-	@if $num_col == 1 {
-		width: 8.33333333%;
-		}
-	@if $num_col == 2 {
-		width: 16.6666667%;
-		}
-	@if $num_col == 3 {
-		width: 25%;
-		}
-	@if  $num_col == 4 {
-		width: 33.3333333%;
-		}
-	@if $num_col == 5 {
-		width: 41.6666666%;
-		}
-	@if $num_col == 6 {
-		width: 50%;
-		}
-	@if $num_col == 7 {
-		width: 58.3333333%;
-		}
-	@if $num_col == 8 {
-		width: 66.6666666%;
-		}
-	@if $num_col == 9 {
-		width: 75%;
-		}
-	@if $num_col == 10{
-		width: 83.3333333%;
-		}
-	@if $num_col == 11 {
-		width: 91.6666666%;
-		}
-	@if $num_col == 12 {
-		width: 100%;
-	}
+
+/*--------------------------------------End General / Start Objects------------------------------------*/
+
+.hide-text{
+	text-indent: 200%;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
-// @include col(12);
+.red{
+	color: $dark-red;
+}
 
-@mixin vertical-align {
-  position: relative;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+.blue{
+	color: $blue;
+}
+
+.light-gray{
+	color: $light-grey;
+}
+
+.dark-gray{
+	color: $dark-grey;
+}
+
+.underline{
+	text-decoration: underline;
 }
 
 
+/*--------------------------------------End Objects / Start Main------------------------------------*/
 
 
-/*-----------------------Styles------------------------*/
 
 
-/*--------------------------------Media Queries------------------------*/
-/*
-*/
-/*--------------------------------Media Queries------------------------*/
 
 
 
 
 
-/* Smartphones  ----------- */
-@media only screen 
-and (min-width : 480px) {
 
-}
 
 
 
@@ -113,73 +84,8 @@ and (min-width : 480px) {
 
 
 
-/* iPads (portrait and landscape) ----------- */
-@media only screen 
-and (min-width : 750px) {
 
-}/*min-width 750*/
 
-
-
-
-
-
-
-
-
-//adjusts header nav after JS removes slide in menu
-@media only screen 
-and (min-width : 769px) {
-
-
-}
-
-
-
-
-
-
-
-
-
-/* Desktops and laptops ----------- */
-@media only screen 
-and (min-width : 837px) {
-
-}
-
-
-
-@media only screen 
-and (min-width : 960px) {
-
-}
-
-
-
-/* Desktops ---------------------- */
-@media only screen 
-and (min-width : 1140px) {
-
-}
-
-
-
-
-
-
-/* Large screens ----------- */
-@media only screen 
-and (min-width : 1824px) {
-/* Styles */
-}
-
-
-
-
-
-/*----Sass imports----*/
-@import "lightbox";
 
 
 

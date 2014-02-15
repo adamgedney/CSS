@@ -1,115 +1,104 @@
-/*--------------------------------------Defaults-------------------------------*/
+/*--------------------------------------End CSS Reset / Start General-------------------------------*/
 
-/* 	SET ALL ELEMENTS BOX-SIZING TO BORDER-BOX
-	If you need support for IE7 and lower use polyfill: https://github.com/Schepp/box-sizing-polyfill 
-	--Borrowed from responsive.gs*/
+
+// Baseline grid: 3px
+
+
+
+//border box borrowed from responsive.gs
 * { -webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
-	box-sizing: border-box; }
-
-	
-body{
-background: $black;
-color: $white;
-font: 62.5% "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	box-sizing: border-box;
 }
 
 
+body{
+	color: $dark-grey;
+	font: 62.5% 'Merriweather', "Book Antiqua", Palatino, "Palatino Linotype", "Palatino LT STD", Georgia, serif;
+	-webkit-font-smoothing: antialiased;
+}
 
-h1,h2,h3,h4, nav, .video-links{
-font-family: 'Tangerine', cursive;
-color: $light-grey;
--webkit-font-smoothing: antialiased;
+h1, h2, h3, h4{
+	font-family: 'Open Sans', "Helvetica Neue Light", Helvetica, Arial, sans-serif;
 }
 
 h1{
-font-size: 5.4em;
-line-height: 1.5em;
+	font-size: 3.6em; /*18x4*/
+	line-height: 1.5;
 }
 
 h2{
-font-size: 4.2em;
-line-height: 1.5em;
-text-shadow: 1px 1px 1px rgba(255,255,255,0.4);
+	font-size: 2.4em;/*18x3*/
+	line-height: 1.5;
 }
 
 h3{
-font-size: 2.7em;
-line-height: 1.5em;
+	font-size: 1.6em;/*18x2 - 6*/
+	line-height: 1.5;
 }
 
-p, ul, dl, label{
-font-size: 1.6em;
-line-height: 1.5em;
-margin-bottom: 20px;
-font-weight: 100;
--webkit-font-smoothing: antialiased;
+p, ul, dl{
+	font-size: 1.6em;
+	font-weight: 100;
+	line-height: 1.5;
+	margin-bottom: 20px;
 }
 
-p{
-	color: $light-grey;
-}
 
-input{
--webkit-font-smoothing: antialiased;
-}
-
-input[type=submit]{
--webkit-appearance: none;
+ul{
+	line-height: 1.5;
 }
 
 a{
-text-decoration: none;
-color: $blue;
+	cursor: pointer;
 }
 
-a:hover, input[type=submit]:hover{
-	opacity: .6;
+a, input[type="submit"]{
+	text-decoration: none;
+	color: $blue;
+	opacity: 1;
+	outline: none;
+	-webkit-appearance: none;/*overrides safari mobile default styling*/
 }
 
-::-webkit-input-placeholder { /* WebKit browsers */
-    color: $grey;
-}
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-    color: $grey;
-}
-::-moz-placeholder { /* Mozilla Firefox 19+ */
-    color: $grey;
-}
-:-ms-input-placeholder { /* Internet Explorer 10+ */
-    color: $grey;
+a:visited{
+	outline: none;
 }
 
-img, iframe{
+a:hover, input[type="submit"]:hover{
+	opacity: .5;
+}
+
+a.no-tran:hover{
+	opacity: 1;
+}
+
+img{
 	max-width: 100%;
 }
 
-.red{
-	color: $dark-red;
+input, button, textarea{
+	border: none;
+	border: 1px solid $light-grey;
+	border-radius: 2px;
+	height: 30px;
+	display: block;
+	margin-bottom: 9px;
+	padding: 9px;
+	font-size: 1.6em;
+	font-weight: 100;
+	outline: none;
 }
 
-.bold{
-	font-weight: 600;
-	color: #e6e6e6;
+::-webkit-input-placeholder { /* WebKit browsers */
+    color: $light-grey;
 }
-
-.cf:before,
-.cf:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: $light-grey;
 }
-
-.cf:after {
-    clear: both;
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: $light-grey;
 }
-
-/**
- * For IE 6/7 only
- * Include this rule to trigger hasLayout and contain floats.
- */
-.cf {
-    *zoom: 1;
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color: $light-grey;
 }
-
-
-
