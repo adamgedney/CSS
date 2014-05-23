@@ -3,13 +3,27 @@ module.exports = function(grunt) {
   //Creates a reference to the package obj
   var pkg = require('./package.json');
 
+
   //Checks the dependencies associated with Grunt and autoloads
   //& requires ALL of them in this Gruntfile
   require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
 
 
-  // Project configuration.
+
+
+
+
+//=========================================//
+// Project configuration.
+//=========================================//
   grunt.initConfig({
+
+    //Project app and build paths
+    projectPaths : {
+      app   : 'app',
+      build : 'dist'
+    },
+
 
     //connect settings. used in grunt serve and livereload
     connect: {
@@ -22,14 +36,18 @@ module.exports = function(grunt) {
       livereload: {
         options: {
           open: true,
+          base: [
+            '.tmp',
+            '<%= projectPaths.app %>'
+          ]
         }
       },
       dist: {
         options: {
-          base: '~/<%= pkg.name %>'
+          base: '~/<%= projectPaths.build %>'
         }
       }
-    },
+    },//connect
 
 
 
@@ -44,10 +62,10 @@ module.exports = function(grunt) {
           compass: true
         },
         files: {
-          'css/main.css': 'scss/main.scss'
+          '<%= projectPaths.app %>/css/main.css': 'scss/main.scss'
         }
       }
-    },
+    },//sass
 
 
 
@@ -62,9 +80,9 @@ module.exports = function(grunt) {
       },
       single_file: {
           expand: true,
-          cwd: 'css/',
+          cwd: '<%= projectPaths.app %>/css/',
           src: 'main.scss',
-          dest: 'css/'
+          dest: '<%= projectPaths.app %>/css/'
       }
     },//autoprefixer
 
@@ -82,23 +100,186 @@ module.exports = function(grunt) {
           debugInfo: true
         }
       }
-    },
+    },//compass
+
+
+
+
+
 
 
 
     //cssmin -minify css file
     cssmin: {
-        minify: {
-          expand: true,
-          cwd: 'css/',
-          src: ['*.css', '!*.min.css'],
-          dest: 'css/',
-          ext: '.min.css'
-        }
-        // files: {
-        //   '/css/output.css': ['/css/main.css']
-        // }
+      minify: {
+        expand: true,
+        cwd: '<%= projectPaths.app %>/css/',
+        src: ['*.css', '!*.min.css'],
+        dest: '<%= projectPaths.app %>/css/',
+        ext: '.min.css'
+      }
+      // files: {
+      //   '/css/output.css': ['/css/main.css']
+      // }
+    },//cssmin
+
+
+
+
+
+
+
+
+
+    // Empties build folders to start fresh
+    clean: {
+      dist: {
+        files: [{
+          dot: true,
+          src: [
+            '.tmp',
+            '<%= projectPaths.build %>/*',
+            '!<%= projectPaths.build %>/.git*'
+          ]
+        }]
       },
+      server: '.tmp'
+    },//clean
+
+
+
+
+
+
+
+
+
+    // Automatically inject Bower components into the app
+    'bower-install' : {
+      app: {
+        html: '<%= projectPaths.app %>/index.html',
+        ignorePath: '<%= projectPaths.app %>/'
+      }
+    },
+
+
+
+
+
+
+
+
+
+    // Renames files for browser caching purposes
+    rev: {
+      dist: {
+        files: {
+          src: [
+            '<%= projectPaths.build %>/scripts/{,*/}*.js',
+            '<%= projectPaths.build %>/css/{,*/}*.css'
+          ]
+        }
+      }
+    },
+
+
+
+
+
+
+
+
+
+    // Reads HTML for usemin blocks to enable smart builds that automatically
+    // concat, minify and revision files. Creates configurations in memory so
+    // additional tasks can operate on them
+    useminPrepare: {
+      html: '<%= projectPaths.app %>/index.html',
+      options: {
+        dest: '<%= projectPaths.build %>'
+      }
+    },
+
+    // Performs rewrites based on rev and the useminPrepare configuration
+    usemin: {
+      html: ['<%= projectPaths.build %>{,*/}*.html'],
+      css: ['<%= projectPaths.build %>/css/{,*/}*.css'],
+      options: {
+        assetsDirs: ['<%= projectPaths.build %>']
+      }
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Allow the use of non-minsafe AngularJS files. Automatically makes it
+    // minsafe compatible so Uglify does not destroy the ng references.
+    //This is why we add Angular module dependencies as strings before the function argument
+    ngmin: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '.tmp/concat/scripts',
+          src: '*.js',
+          dest: '.tmp/concat/scripts'
+        }]
+      }
+    },
+
+
+
+
+
+
+
+
+    // Copies remaining files to places other tasks can use
+    copy: {
+      dist: {
+        files: [{
+          expand: true,
+          dot: true,
+          cwd: '<%= projectPaths.app %>',
+          dest: '<%= projectPaths.build %>',
+          src: [
+            '*.{ico,png,txt}',
+            '.htaccess',
+            '.gitignore',
+            '*.html',
+            '*.tpl',
+            'css/*',
+            'views/{,*/}*',
+            'images/{,*/}*',
+            'fonts/*'
+          ]
+        }, {
+          expand: true,
+          cwd: '.tmp/images',
+          dest: '<%= projectPaths.build %>/images',
+          src: ['generated/*']
+        }]
+      },
+      styles: {
+        expand: true,
+        cwd: '/css',
+        dest: '.tmp/css/',
+        src: '{,*/}*.css'
+      }
+    },
+
+
+
 
 
 
@@ -111,14 +292,14 @@ module.exports = function(grunt) {
       //watch to see if we change this gruntfile
       gruntfile: {
         files: ['Gruntfile.js']
-      },
+      },//gruntfile
 
       //compass
       compass: {
-        files: ['scss/{,*/}*.{scss,sass}'],
+        files: ['<%= projectPaths.app %>/scss/{,*/}*.{scss,sass}'],
         tasks: ['compass:server']
         //tasks: ['compass:server', 'autoprefixer'] removed to hack error. Reenable before build
-      },
+      },//compass
 
       //livereload
       livereload: {
@@ -126,28 +307,39 @@ module.exports = function(grunt) {
           livereload: '<%= connect.options.livereload %>'
         },
         files: [
-          '{,*/}*.html',
-          '{,*/}*.php',
-          'scripts/{,*/}*.js',
-          'views/{,*/}*.tpl',
-          'scss/{,*/}*.scss',
-          'images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+          '<%= projectPaths.app %>/{,*/}*.html',
+          '<%= projectPaths.app %>/{,*/}*.php',
+          '<%= projectPaths.app %>/scripts/{,*/}*.js',
+          '<%= projectPaths.app %>/views/{,*/}*.tpl',
+          '<%= projectPaths.app %>/scss/{,*/}*.scss',
+          '<%= projectPaths.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
         ]
-      },
+      },//livereload
 
       //sass
       sass: {
-        files: 'scss/{,*/}*.{scss,sass}',
+        files: '<%= projectPaths.app %>/scss/{,*/}*.{scss,sass}',
         tasks: ['sass:dev', 'cssmin']
-      },
+      }//sass
 
 
 
-    },// watch
+    }// watch
+  //=========================================//
   });//grunt.initConfig
+  //=========================================//
 
 
 
+
+
+
+
+
+
+//=========================================//
+//Tasks
+//=========================================//
 
   //grunt serve
   grunt.registerTask('serve', function (target) {
@@ -160,8 +352,23 @@ module.exports = function(grunt) {
   });
 
 
-  //Build
-  // grunt.registerTask('build', 'requirejs');
+
+
+
+
+
+
+grunt.registerTask('build', [
+    'clean:dist',
+    'useminPrepare',
+    'concat',
+    'ngmin',
+    'copy:dist',
+    'cssmin',
+    'uglify',
+    'rev',
+    'usemin'
+  ]);
 
 
 
