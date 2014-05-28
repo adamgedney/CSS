@@ -154,14 +154,29 @@ module.exports = function(grunt) {
 
 
 
+    // Automatically inject Bower components into the app
+    'bower-install' : {
+      app: {
+        html: '<%= projectPaths.app %>/index.html',
+        ignorePath: '<%= projectPaths.app %>/'
+      }
+    },
+
+
+
+
+
+
+
+
+
     // Renames files for browser caching purposes
     rev: {
       dist: {
         files: {
           src: [
             '<%= projectPaths.build %>/scripts/{,*/}*.js',
-            '<%= projectPaths.build %>/css/{,*/}*.css',
-            '<%= projectPaths.build %>/fonts/*'
+            '<%= projectPaths.build %>/css/{,*/}*.css'
           ]
         }
       }
@@ -199,14 +214,6 @@ module.exports = function(grunt) {
 
 
 
-
-
-    //Build directory
-    buildcontrol: {
-      options: {
-        dir: '<%= projectPaths.build %>'
-      }
-    },
 
 
 
@@ -251,9 +258,9 @@ module.exports = function(grunt) {
             '.gitignore',
             '*.html',
             '*.tpl',
-            'views/{,*/}*.html',
-            'views/{,*/}*.tpl',
-            'images/{,*/}*.{webp}',
+            'css/*',
+            'views/{,*/}*',
+            'images/{,*/}*',
             'fonts/*'
           ]
         }, {
@@ -265,8 +272,8 @@ module.exports = function(grunt) {
       },
       styles: {
         expand: true,
-        cwd: '/styles',
-        dest: '.tmp/styles/',
+        cwd: '/css',
+        dest: '.tmp/css/',
         src: '{,*/}*.css'
       }
     },
@@ -353,19 +360,14 @@ module.exports = function(grunt) {
 
 grunt.registerTask('build', [
     'clean:dist',
-    'bower-install',
     'useminPrepare',
-    // 'concurrent:dist',
-    // 'autoprefixer',
     'concat',
     'ngmin',
     'copy:dist',
-    // 'cdnify',
     'cssmin',
     'uglify',
     'rev',
-    'usemin',
-    // 'htmlmin'
+    'usemin'
   ]);
 
 

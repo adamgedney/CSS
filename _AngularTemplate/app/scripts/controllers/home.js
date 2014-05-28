@@ -14,6 +14,8 @@ App.controller('home', ['$scope', function($scope){
 
 	$scope.title = 'my eggs'
 
+	$scope.in = 'foo bar';
+
 
 
 
